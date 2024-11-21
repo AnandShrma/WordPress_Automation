@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  database:
+    image: mysql:latest
+    container_name: mydb1
+    networks:
+      - Mynet
+    volumes:
+      - /data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: redhat
+      MYSQL_DATABASE: blogdb
+      MYSQL_USER: Anand
+      MYSQL_PASSWORD: redhat
+
+  wordpress:
+    depends_on:
+      - database
+    image: wordpress:latest
+    container_name: mywp1
+    networks:
+      - Mynet
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: mydb1
+      WORDPRESS_DB_USER: Anand
+      WORDPRESS_DB_PASSWORD: redhat
+      WORDPRESS_DB_NAME: blogdb
+
+networks:
+  Mynet:
+    driver: bridge

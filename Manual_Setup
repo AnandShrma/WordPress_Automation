@@ -1,0 +1,5 @@
+#1 docker network create Mynet --driver bridge
+# Mysql Container
+#2 docker run -dit --name mydb --network Mynet -e MYSQL_ROOT_PASSWORD=redhat -e MYSQL_DATABASE=blogdb -e MYSQL_USER=Anand -e MYSQL_PASSWORD=redhat -v /data:/var/lib/mysql
+# wordpress
+#3 docker run -dit --name mywp1 --network Mynet -e WORDPRESS_DB_HOST: mydb1 -e WORDPRESS_DB_USER: Anand -e WORDPRESS_DB_PASSWORD: redhat -e WORDPRESS_DB_NAME: blogdb -p 8080:80 wordpress:latest
